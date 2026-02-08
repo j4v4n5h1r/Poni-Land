@@ -3,3 +3,6 @@
 build/
 *.aab
 *.apk
+
+# macOS system files
+.DS_Store
