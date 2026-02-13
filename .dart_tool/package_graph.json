@@ -5,7 +5,7 @@
   "packages": [
     {
       "name": "kenan_barber_app",
-      "version": "1.0.0+8",
+      "version": "1.0.1+12",
       "dependencies": [
         "cupertino_icons",
         "flutter",
