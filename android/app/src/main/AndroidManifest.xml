@@ -2,7 +2,7 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="Poni Land Cashback"
+        android:label="Poni Land"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
