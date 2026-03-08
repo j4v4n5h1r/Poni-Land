@@ -102,6 +102,51 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with SingleTickerProv
     return _allTransactions.fold(0.0, (sum, t) => sum + t.cashbackEarned);
   }
 
+  Future<void> _resetCashback(User user) async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Cashback Sıfırla'),
+        content: Text('${user.fullName} adlı istifadəçinin ₼${user.balance.toStringAsFixed(2)} cashback balansı sıfırlanacaq. Əminsiniz?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('İmtina'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            child: const Text('Sıfırla', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+
+    if (confirm != true) return;
+
+    try {
+      await _apiService.resetUserCashback(user.id);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('✅ ${user.fullName} cashback balansı sıfırlandı'),
+            backgroundColor: AppColors.successGreen,
+          ),
+        );
+        await _loadUsers();
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('❌ Xəta: ${e.toString()}'),
+            backgroundColor: AppColors.errorRed,
+          ),
+        );
+      }
+    }
+  }
+
   Future<void> _changeUserRole(User user, String newRole) async {
     try {
       await _apiService.updateUserRole(user.id, newRole);
@@ -363,26 +408,56 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with SingleTickerProv
                   Text(user.email),
                   Text(user.phoneNumber ?? 'Telefon yoxdur'),
                   const SizedBox(height: 8),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: _getRoleColor(user.role).withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text(
-                      _getRoleDisplayName(user.role),
-                      style: TextStyle(
-                        color: _getRoleColor(user.role),
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: _getRoleColor(user.role).withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          _getRoleDisplayName(user.role),
+                          style: TextStyle(
+                            color: _getRoleColor(user.role),
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
-                    ),
+                      const SizedBox(width: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: AppColors.successGreen.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          '₼${user.balance.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            color: AppColors.successGreen,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-              trailing: IconButton(
-                icon: const Icon(Icons.edit, color: AppColors.primaryBlue),
-                onPressed: () => _showRoleChangeDialog(user),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.refresh, color: Colors.red),
+                    tooltip: 'Cashback sıfırla',
+                    onPressed: () => _resetCashback(user),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.edit, color: AppColors.primaryBlue),
+                    onPressed: () => _showRoleChangeDialog(user),
+                  ),
+                ],
               ),
             ),
           );

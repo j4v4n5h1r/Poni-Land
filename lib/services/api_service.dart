@@ -241,6 +241,17 @@ class ApiService {
     }
   }
 
+  Future<void> resetUserCashback(int userId) async {
+    final response = await http.put(
+      Uri.parse('$baseUrl/users/$userId/reset-cashback'),
+      headers: _getHeaders(),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to reset cashback: ${response.body}');
+    }
+  }
+
   Future<void> updateUserRole(int userId, String newRole) async {
     final response = await http.put(
       Uri.parse('$baseUrl/users/$userId/role'),
