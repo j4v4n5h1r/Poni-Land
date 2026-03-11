@@ -130,9 +130,7 @@ class _SellerHomeScreenState extends State<SellerHomeScreen> {
     });
 
     try {
-      final authService = Provider.of<AuthService>(context, listen: false);
-      final user = authService.currentUser!;
-      final serviceType = user.role == 'seller_barber' ? 'barber' : 'zoopark';
+      const serviceType = 'seller';
 
       await _apiService.createService(
         name: name,
@@ -272,10 +270,6 @@ class _SellerHomeScreenState extends State<SellerHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authService = Provider.of<AuthService>(context);
-    final user = authService.currentUser!;
-    final sellerType = user.role == 'seller_barber' ? '✂️ Bərbər' : '🦁 Zoo Park';
-
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7FA),
       body: Column(
@@ -290,25 +284,6 @@ class _SellerHomeScreenState extends State<SellerHomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Seller Type Badge
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                      decoration: BoxDecoration(
-                        gradient: AppColors.primaryGradient,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        sellerType,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-
                     // Stats Cards
                     Row(
                       children: [

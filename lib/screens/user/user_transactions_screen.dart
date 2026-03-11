@@ -52,30 +52,18 @@ class _UserTransactionsScreenState extends State<UserTransactionsScreen> {
   }
 
   String _getTransactionIcon(String? type) {
-    if (type == null) return '📦';
-    if (type.toLowerCase().contains('barber')) return '✂️';
-    if (type.toLowerCase().contains('zoo')) return '🦁';
-    return '📦';
+    return '🛍️';
   }
 
   String _getTransactionLabel(String? type) {
-    if (type == null) return 'Xidmət';
-    if (type.toLowerCase().contains('barber')) return 'Bərbər';
-    if (type.toLowerCase().contains('zoo')) return 'Zoo Park';
-    return 'Xidmət';
+    return 'Satıcı';
   }
 
   Color _getBadgeColor(String? type) {
-    if (type == null) return const Color(0xFFDBEAFE);
-    if (type.toLowerCase().contains('barber')) return const Color(0xFFDBEAFE);
-    if (type.toLowerCase().contains('zoo')) return const Color(0xFFFED7AA);
     return const Color(0xFFDBEAFE);
   }
 
   Color _getBadgeTextColor(String? type) {
-    if (type == null) return AppColors.primaryBlue;
-    if (type.toLowerCase().contains('barber')) return AppColors.primaryBlue;
-    if (type.toLowerCase().contains('zoo')) return const Color(0xFFEA580C);
     return AppColors.primaryBlue;
   }
 

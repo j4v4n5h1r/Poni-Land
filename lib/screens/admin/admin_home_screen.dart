@@ -171,10 +171,10 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with SingleTickerProv
     switch (role) {
       case 'user':
         return 'İstifadəçi';
+      case 'seller':
       case 'seller_barber':
-        return 'Satıcı - Bərbər';
       case 'seller_zoopark':
-        return 'Satıcı - Zoopark';
+        return 'Satıcı';
       case 'admin':
         return 'Admin';
       default:
@@ -186,10 +186,10 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with SingleTickerProv
     switch (role) {
       case 'admin':
         return Colors.red;
+      case 'seller':
       case 'seller_barber':
-        return AppColors.primaryBlue;
       case 'seller_zoopark':
-        return Colors.green;
+        return AppColors.primaryBlue;
       default:
         return Colors.grey;
     }
@@ -199,10 +199,10 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with SingleTickerProv
     switch (role) {
       case 'admin':
         return Icons.admin_panel_settings;
+      case 'seller':
       case 'seller_barber':
-        return Icons.cut;
       case 'seller_zoopark':
-        return Icons.pets;
+        return Icons.store;
       default:
         return Icons.person;
     }
@@ -225,19 +225,11 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with SingleTickerProv
               },
             ),
             ListTile(
-              leading: const Icon(Icons.cut, color: AppColors.primaryBlue),
-              title: const Text('Satıcı - Bərbər'),
+              leading: const Icon(Icons.store, color: AppColors.primaryBlue),
+              title: const Text('Satıcı'),
               onTap: () {
                 Navigator.pop(context);
-                _changeUserRole(user, 'seller_barber');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.pets, color: Colors.green),
-              title: const Text('Satıcı - Zoopark'),
-              onTap: () {
-                Navigator.pop(context);
-                _changeUserRole(user, 'seller_zoopark');
+                _changeUserRole(user, 'seller');
               },
             ),
             ListTile(

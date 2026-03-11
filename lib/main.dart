@@ -53,7 +53,7 @@ class AuthWrapper extends StatelessWidget {
           return const AdminHomeScreen();
         } else if (user.role == 'user') {
           return const UserHomeScreen();
-        } else if (user.role == 'seller_barber' || user.role == 'seller_zoopark') {
+        } else if (user.role == 'seller_barber' || user.role == 'seller_zoopark' || user.role == 'seller') {
           return const SellerHomeScreen();
         } else {
           return const LoginScreen();
