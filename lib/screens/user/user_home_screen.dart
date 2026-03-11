@@ -374,7 +374,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '✂️ Bərbər',
+                  '🛍️ Satıcılar',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -383,7 +383,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Saç kəsimi və baxım xidmətlərindən cashback qazanın',
+                  'Satıcılardan xidmət alaraq cashback qazanın',
                   style: TextStyle(
                     color: Colors.white70,
                     fontSize: 12,
@@ -406,7 +406,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '🦁 Zoo Park',
+                  '🎁 Cashback',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -415,7 +415,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Zoopark ziyarətlərindən cashback qazanın',
+                  'Hər alış-verişdə avtomatik cashback qazanın',
                   style: TextStyle(
                     color: Colors.white70,
                     fontSize: 12,
